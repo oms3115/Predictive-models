@@ -1,0 +1,27 @@
+
+#import libraries and loading of data
+#normalization of data
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+
+#creating the model
+from sklearn.linear_model import Ridge
+
+#train test split
+X_train, X_test, y_train, y_test = train_test_split(X_crime, y_crime,
+                                                   random_state = 0)
+#normalization
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+#fit the data to the model
+linridge = Ridge(alpha=20.0).fit(X_train_scaled, y_train)
+
+#model performance and score
+
+print('Crime dataset')
+print('ridge regression linear model intercept', linridge.intercept_)
+print('ridge regression linear model coeff',\nlinridge.coef_)
+print('R-squared score (training)',(linridge.score(X_train_scaled, y_train))
+print('R-squared score (test):',linridge.score(X_test_scaled, y_test))
+print('Number of non-zero features', np.sum(linridge.coef_ != 0))
